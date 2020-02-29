@@ -1,3 +1,11 @@
+## 参考资料
+
+1.https://draveness.me/golang/docs/part2-foundation/ch03-datastructure/golang-hashmap/
+
+2.https://github.com/cch123/golang-notes/blob/master/map.md
+
+
+
 ##  基础结构
 
 ```go
