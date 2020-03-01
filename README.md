@@ -1,7 +1,7 @@
 # p2p_learning
 Collaborative learning
 
-# [思维导图](https://www.processon.com/mindmap/5e5b76c0e4b02bc3ad6a8af8?tutorial=false)
+# [协作编辑思维导图](https://www.processon.com/mindmap/5e5b76c0e4b02bc3ad6a8af8?tutorial=false)
 
 # 分享模板
 
