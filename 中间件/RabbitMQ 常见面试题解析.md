@@ -77,7 +77,7 @@
 
 ## RabbitMQ的模型
 
-
+![](https://github.com/P2P-Learning/P2P_Learning/blob/master/%E4%B8%AD%E9%97%B4%E4%BB%B6/images/rabbitMQ-mode.png?raw=true)
 
 
 
@@ -181,7 +181,7 @@ RabbitMQ高可用的方式可以选择集群部署和镜像模式部署。
 
 为什么需要镜像队列？在原有集群模式下，实际上队列只存在主节点上，其他节点不会保存队列数据，只是做转发而已，如果真的保存队列数据挂掉之后，整个集群还是不可用的。所以后面RabbitMQ就把队列数据在每个节点都保存一份，这就是镜像队列。
 
-![image-20200308114309277](/Users/luozhou/Documents/学习分享/中间件/images/mirror-queue.png)
+![](https://github.com/P2P-Learning/P2P_Learning/blob/master/%E4%B8%AD%E9%97%B4%E4%BB%B6/images/mirror-queue.png?raw=true)
 
 
 
