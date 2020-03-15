@@ -1,8 +1,72 @@
 ## RabbitMQ 面试
 
+### 预备知识
+
+#### RabbitMQ的基本概念
+
+**channel 信道**：信道是生产消费者与rabbit通信的渠道，生产者publish或是消费者subscribe一个队列都是通过信道来通信的，信道是建立在TCP连接上的虚拟连接，什么意思呢？就是说rabbitmq在一条TCP上建立成百上千个信道来达到多个线程处理，这个TCP被多个线程共享，每个线程对应一个信道，信道在rabbit都有唯一的ID ,保证了信道私有性，对应上唯一的线程使用。
+
+##### RabbitMQ的六种模式
+
+**simple模式**：
+
+![](https://www.rabbitmq.com/img/tutorials/python-one-overall.png)
+
+​	1.消息产生消息，将消息放入队列
+
+​	2.消息的消费者(consumer) 监听 消息队列,如果队列中有消息,就消费掉,消息被拿走后,自动从队列中删除	(隐患 消息可能没有被消费者正确处理,已经从队列中消失了,造成消息的丢失，这里可以设置成手动的ack,	但如果设置成手动ack，处理完后要及时发送ack消息给队列，否则会造成内存溢出)。
+
+**work工作模式(资源的竞争)**
+
+![](https://www.rabbitmq.com/img/tutorials/python-two.png)
+
+1.生产者产生消息放入队列，多个消费者消费消息，这里是由队列调度采用轮询（默认）的调度算法分配消息给消费者。
+
+**publish/subscribe发布订阅(共享资源)**
+
+![](https://www.rabbitmq.com/img/tutorials/exchanges.png)
+
+1、每个消费者监听自己的队列；
+
+2、生产者将消息发给exchange（交换机），由交换机将消息转发到绑定此交换机的每个队列，每个绑定交换机的队列都将接收到消息
+
+**exchange的作用**就是类似路由器，消息发送会指定exchange和routing_key，队列声明的时候会绑定exchange和routing_key，那么消息生产的时候只要指定exchange和routing_key就可以路由到对应的队列了。
+
+**exchange** 有三种模式:
+
+​		1、直接发送模式（direct）1:1, 完全匹配，直接转发到绑定队列。
+
+​       2、扇出模式（fanout）1：N, 一个消息可以发送到多个队列，类似于广播。
+
+​       3、主题模式（topic)N:1 ,可以支持routing_key是通配符模式，多个生产者的消息只要匹配通配符就可以发送到对应队列消费。
 
 
-### 1.RabbitMQ的使用场景是什么？
+
+**routing路由模式**
+
+​	![](https://www.rabbitmq.com/img/tutorials/direct-exchange.png)
+
+1.消息生产者发送给exchange，exchange根据绑定的规则转发到对应的消息队列
+
+topic 主题模式(路由模式的一种)**
+
+![](https://www.rabbitmq.com/img/tutorials/python-five.png)
+
+1.消息生产者发送给exchange，exchange根据通配符规则判断是否符合路由规则，符合路由规则就把消息转发到指定的队列中。
+
+**RPC模式**
+
+![](https://www.rabbitmq.com/img/tutorials/python-six.png)
+
+1.生产者会发送消息到声明的rpc队列，并且指定reply_to的回调队列，设置`correlation_id`唯一id，消费者受到消息处理完毕后，发送回复消息到生产者指定的回调队列，同时也给回复消息设置一样的`correlation_id`，生产者接受到回调，判断id是否一致即可。
+
+#### RabbitMQ的模型
+
+![](https://github.com/P2P-Learning/P2P_Learning/blob/master/%E4%B8%AD%E9%97%B4%E4%BB%B6/images/rabbitMQ-mode.png?raw=true)
+
+
+
+### 1.MQ的使用场景是什么？
 
 主要场景3个：异步、解耦、削锋。
 
@@ -75,9 +139,6 @@
 
 3、开发语言小众，是Erlang，对二开的要求比较高。
 
-## RabbitMQ的模型
-
-![](https://github.com/P2P-Learning/P2P_Learning/blob/master/%E4%B8%AD%E9%97%B4%E4%BB%B6/images/rabbitMQ-mode.png?raw=true)
 
 
 
@@ -91,19 +152,17 @@
 
 解决方案：
 
-![](https://github.com/doocs/advanced-java/blob/master/images/rabbitmq-order-02.png?raw=true)
+1、牺牲性能，把上图中的消费者只保留一个，使得队列和消费者是1：1,这样可以保证消息的有序性
 
-这里是一个队列对应一个消费者，也可以用一个队列对应多个消费者，然后在代码层面依赖内存队列排序。
+2、在多消费者或者单消费者多线程的情况下，另外依赖一个公共内存去排队。可以依赖redis去排序，也可以在单实例多线程情况下依赖一个公共的内存队列。
 
 
 
-## 5.RabbitMQ如何保证消息的幂等性
+## 5.RabbitMQ如何保证消息不被重复消费
 
-答题思路：这里需要结合业务去考虑，有些业务场景天然就支持幂等性，比如我最终消费者存储的是Redis,那这就没必要去设计MQ的幂等性了。如果消费存储的是数据库，可以给消息设置一个全局唯一id，落库的形式有两种：
+1、以消息id作为数据库主键，依赖数据库主键唯一性保证不被重复消费
 
-1.插入之前先查询，有就不插入。
-
-2.直接以全局id为主键，直接插入，数据库有全局唯一约束。
+2、设置消息全局唯一id，消费消息前先查询redis有没有该消息id，如果有就不消费，没有就消费消息，同时把该消息id存入Redis。
 
 ## 6. RabbitMQ如何保证消息不丢失
 
