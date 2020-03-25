@@ -3,6 +3,7 @@ Collaborative learning
 
 # 社群核心逻辑
 Learn by sharing。
+
 知识掌握分3个境界:
 1. 自己懂
 2. 能写出来
