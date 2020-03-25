@@ -27,7 +27,7 @@ Learn by sharing。
 我们这种分享形式就是为了达到第3个境界。
 
 # 分享流程
-1. 首先思维导图中选择知识点，其次是自定义分享主题。
+1. 首先[协作编辑思维导图](https://www.processon.com/mindmap/5e5b76c0e4b02bc3ad6a8af8?tutorial=false)中选择知识点，其次是自定义分享主题。
 2. 选择了分享主题后，在该项目建立issue，标记TODO。
 3. 约定时间通过zoom进行分享
 4. 分享完成后，把一些重要问题，讨论和TODO事项记录到issue的comment中。
@@ -41,7 +41,7 @@ Learn by sharing。
 5. 模拟面试中的回答
 
 # 如何选择自己要分享的知识点
-主要参考这里[协作编辑思维导图](https://www.processon.com/mindmap/5e5b76c0e4b02bc3ad6a8af8?tutorial=false), 目前的话都是比较围绕面试的知识点。
+主要参考之前提到的`协作编辑思维导图`, 目前的话都是比较围绕面试的知识点。
 自行选择要分享的主题，然后大家都比较认可的话，就可以准备分享了，准备时间1~2周。
 
 # 分享的频率
