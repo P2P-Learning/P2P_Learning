@@ -1,6 +1,14 @@
 # p2p_learning
 Collaborative learning
 
+# 社群核心逻辑
+Learn by sharing。
+知识掌握分3个境界:
+1. 自己懂
+2. 能写出来
+3. 能把别人讲懂
+我们这种分享形式就是为了达到第3个境界
+
 # [协作编辑思维导图](https://www.processon.com/mindmap/5e5b76c0e4b02bc3ad6a8af8?tutorial=false)
 
 # 分享流程
