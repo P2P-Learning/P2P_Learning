@@ -72,23 +72,23 @@ topic 主题模式(路由模式的一种)**
 
 **异步：**：
 
-![](https://github.com/doocs/advanced-java/blob/master/images/mq-3.png?raw=true)
+![](https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/images/mq-3.png?raw=true)
 
 使用MQ：
 
-![](https://github.com/doocs/advanced-java/raw/master/images/mq-4.png)
+![](https://github.com/doocs/advanced-java/raw/master/docs/high-concurrency/images/mq-4.png)
 
 **解耦**：
 
 
 
-![](https://github.com/doocs/advanced-java/blob/master/images/mq-1.png?raw=true)
+![](https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/images/mq-1.png?raw=true)
 
 
 
 **使用MQ**
 
-![](https://github.com/doocs/advanced-java/blob/master/images/mq-2.png?raw=true)
+![](https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/images/mq-2.png?raw=true)
 
 **削锋**：
 
@@ -148,7 +148,7 @@ topic 主题模式(路由模式的一种)**
 
 场景说明：
 
-![](https://github.com/doocs/advanced-java/blob/master/images/rabbitmq-order-01.png?raw=true)
+![](https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/images/rabbitmq-order-01.png)
 
 解决方案：
 
@@ -168,11 +168,11 @@ topic 主题模式(路由模式的一种)**
 
 消息丢失的三种情况：
 
-![](https://github.com/doocs/advanced-java/blob/master/images/rabbitmq-message-lose.png?raw=true)
+![](https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/images/rabbitmq-message-lose.png)
 
 解决方案：
 
-![](https://github.com/doocs/advanced-java/blob/master/images/rabbitmq-message-lose-solution.png?raw=true)
+![](https://github.com/doocs/advanced-java/blob/master/docs/high-concurrency/images/rabbitmq-message-lose-solution.png)
 
 开启RabbitMQ持久化需要保证
 
